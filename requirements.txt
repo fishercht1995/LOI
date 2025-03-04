@@ -1,0 +1,56 @@
+blinker @ file:///croot/blinker_1737448726027/work
+boto3==1.36.26
+botocore==1.36.26
+Brotli @ file:///croot/brotli-split_1736182456865/work
+cachetools==5.5.2
+certifi @ file:///croot/certifi_1738623731865/work/certifi
+charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+click @ file:///croot/click_1698129812380/work
+diffusers==0.32.2
+filelock==3.17.0
+Flask @ file:///croot/flask_1737454299809/work
+fsspec==2025.2.0
+google-api-core==2.24.1
+google-auth==2.38.0
+google-cloud-core==2.4.2
+google-cloud-storage==3.0.0
+google-crc32c==1.6.0
+google-resumable-media==2.7.2
+googleapis-common-protos==1.68.0
+huggingface-hub==0.29.1
+idna @ file:///croot/idna_1714398848350/work
+importlib_metadata @ file:///croot/importlib_metadata-suite_1732633488278/work
+itsdangerous @ file:///croot/itsdangerous_1716533337253/work
+Jinja2 @ file:///croot/jinja2_1737760107953/work
+jmespath==1.0.1
+MarkupSafe @ file:///croot/markupsafe_1738584038848/work
+mpmath==1.3.0
+networkx==3.2.1
+numpy==2.0.2
+packaging==24.2
+pillow==11.1.0
+proto-plus==1.26.0
+protobuf==5.29.3
+pyasn1==0.6.1
+pyasn1_modules==0.4.1
+PySocks @ file:///tmp/build/80754af9/pysocks_1605305812635/work
+python-dateutil==2.9.0.post0
+PyYAML==6.0.2
+regex==2024.11.6
+requests @ file:///croot/requests_1730999120400/work
+rsa==4.9
+s3transfer==0.11.2
+safetensors==0.5.3
+six==1.17.0
+sympy==1.13.1
+tokenizers==0.21.0
+torch==2.6.0
+tqdm==4.67.1
+transformers==4.49.0
+triton==3.2.0
+typing_extensions==4.12.2
+urllib3==1.26.20
+Werkzeug @ file:///croot/werkzeug_1737448706492/work
+zipnn==0.5.2
+zipp @ file:///croot/zipp_1732630741423/work
+zstandard==0.23.0
