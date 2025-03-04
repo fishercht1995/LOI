@@ -5,7 +5,7 @@ temp_dir=$1
 model=$2
 for cloud in s3 gcp r2; 
 do
-    echo "Start Cloud $base"
+    echo "Start Cloud $cloud"
     for compression in znn tensors; 
     do
         echo "Download file $compression"
