@@ -39,6 +39,22 @@ class R2Storage:
         self.s3_client.download_file(self.bucket_name, r2_key, download_path)
         print(f"✅ 下载成功: {download_path}")
 
+    def get_folder(self, r2_prefix, local_folder):
+        """ 从 Cloudflare R2 下载整个文件夹 """
+        os.makedirs(local_folder, exist_ok=True)
+        
+        paginator = self.s3_client.get_paginator("list_objects_v2")
+        for page in paginator.paginate(Bucket=self.bucket_name, Prefix=r2_prefix):
+            if "Contents" in page:
+                for obj in page["Contents"]:
+                    r2_key = obj["Key"]
+                    relative_path = os.path.relpath(r2_key, r2_prefix)
+                    local_file_path = os.path.join(local_folder, relative_path)
+
+                    os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+                    self.s3_client.download_file(self.bucket_name, r2_key, local_file_path)
+                    print(f"✅ 文件下载成功: r2://{self.bucket_name}/{r2_key} -> {local_file_path}")
+
 
 def test():
     from util import load_access_keys
@@ -55,5 +71,20 @@ def test():
     import sys
     r2_storage.put(f"/home/yuqi/zipnn/models/{sys.argv[1]}/{sys.argv[2]}", f"{sys.argv[1]}-{sys.argv[2]}")
 
+def download():
+    from util import load_access_keys
+    keys = load_access_keys()
+
+    # 你需要替换 Cloudflare R2 的 endpoint
+    r2_endpoint = "https://your-account-id.r2.cloudflarestorage.com"
+
+    r2_storage = R2Storage(
+        r2_access_key=keys["r2_key"],
+        r2_secret_key=keys["r2_secret_key"],
+        r2_endpoint=keys["r2_endpoint"]
+    )
+    import sys
+    r2_storage.get_folder(sys.argv[1], sys.argv[2])
+
 if __name__ == "__main__":
-    test()
+    download()

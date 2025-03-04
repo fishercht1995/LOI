@@ -36,6 +36,19 @@ class GCPStorage:
         blob = self.bucket.blob(gcs_key)
         blob.download_to_filename(download_path)
         print(f"✅ 下载成功: {download_path}")
+    
+    def get_folder(self, gcs_prefix, local_folder):
+        """ 从 GCS 递归下载整个文件夹 """
+        os.makedirs(local_folder, exist_ok=True)
+        
+        blobs = self.client.list_blobs(self.bucket_name, prefix=gcs_prefix)
+        for blob in blobs:
+            relative_path = os.path.relpath(blob.name, gcs_prefix)  # 计算相对路径
+            local_file_path = os.path.join(local_folder, relative_path)
+
+            os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+            blob.download_to_filename(local_file_path)
+            print(f"✅ 文件下载成功: gs://{self.bucket_name}/{blob.name} -> {local_file_path}")
 
 
 
@@ -44,5 +57,11 @@ def test():
     gcp = GCPStorage("modelssingle")
     gcp.put(f"/home/yuqi/zipnn/models/{sys.argv[1]}/{sys.argv[2]}", f"{sys.argv[1]}-{sys.argv[2]}")
 
+def download():
+    import sys
+    gcp = GCPStorage("modelssingle")
+    import sys
+    gcp.get_folder(sys.argv[1], sys.argv[2])
+
 if __name__ == "__main__":
-    test()
+    download()
